@@ -7,10 +7,10 @@ import streamlit as st
 
 st.markdown("""
     <h1 style='text-align: center; background-color: #FF6347; border-radius: 12px; margin-bottom: 2em; color: white; font-family: "Arial", sans-serif; padding: 20px; border-bottom: 4px solid #FF6347;'>
-    🏡 <strong>Dashboard Interactif : Analyse du Marché Immobilier</strong>
+     <strong>Dashboard Interactif : Analyse du Marché Immobilier</strong>
     </h1>
 """, unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: #2c3e50;'>Exploration des tendances, des prix, et des caractéristiques des maisons ! 🔍📊</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #2c3e50;'>Exploration des tendances, des prix, et des caractéristiques des maisons ! </h3>", unsafe_allow_html=True)
 
 
 try:
@@ -48,7 +48,7 @@ if df is not None:
 if df is not None and st.sidebar.checkbox('Afficher le DataSet après nettoyage'):
     st.markdown("""
         <h3 style='font-family: Arial, sans-serif; text-align: center; font-size: 26px; font-weight: bold; color: #27ae60; border-bottom: 3px solid #27ae60; padding-bottom: 5px;'> 
-        ✨ DataSet après nettoyage ✨
+         DataSet après nettoyage 
         </h3>
     """, unsafe_allow_html=True)
     st.write(df.head())
@@ -73,7 +73,7 @@ if df is not None:
     if df_filtered is not None and st.sidebar.checkbox('Afficher le DataSet filtré'):
         st.markdown("""
             <h3 style='font-family: Arial, sans-serif; text-align: center; font-size: 26px; font-weight: bold; color: #2980b9; border-bottom: 3px solid #2980b9; padding-bottom: 5px;'> 
-            🔍 DataSet Filtré 🔍
+             DataSet Filtré 
             </h3>
         """, unsafe_allow_html=True)
         st.dataframe(df_filtered.head())
@@ -82,7 +82,7 @@ if df is not None:
 if df is not None and st.sidebar.checkbox('Résumé Statistique'):
     st.markdown("""
         <h3 style='font-family: Arial, sans-serif; text-align: center; font-size: 26px; font-weight: bold; color: #8e44ad; border-bottom: 3px solid #8e44ad; padding-bottom: 5px;'> 
-        📊 Résumé Statistique 📊
+         Résumé Statistique 
         </h3>
     """, unsafe_allow_html=True)
     st.write(df.describe().T)
@@ -94,7 +94,7 @@ tabs = st.tabs(["Distribution des Prix de Vente", "Carte de Densité des Ventes"
 with tabs[0]:
     st.markdown("""
         <h3 style='font-family: Arial, sans-serif; text-align: center; font-size: 26px; font-weight: bold; color: #2ecc71;'> 
-        🏡 Distribution des Prix de Vente 🏡
+         Distribution des Prix de Vente 
         </h3>
     """, unsafe_allow_html=True)
     dat_p = df["SalePrice"]
@@ -110,7 +110,7 @@ with tabs[0]:
 with tabs[1]:
     st.markdown("""
         <h3 style='font-family: Arial, sans-serif; text-align: center; font-size: 26px; font-weight: bold; color: #2ecc71;'> 
-        🏡 Carte de Densité des Ventes en fonction de la Surface Habitable 🏡
+         Carte de Densité des Ventes en fonction de la Surface Habitable 
         </h3>
     """, unsafe_allow_html=True)
     plt.figure(figsize=(10, 6))
@@ -127,7 +127,7 @@ with tabs[1]:
 with tabs[2]:
     st.markdown("""
         <h3 style='font-family: Arial, sans-serif; text-align: center; font-size: 26px; font-weight: bold; color: #2ecc71;'> 
-        🏡 Diagramme en barres des ventes par années de construction 🏡
+         Diagramme en barres des ventes par années de construction �
         </h3>
     """, unsafe_allow_html=True)
     vent_ann = df.groupby('Year Built')["SalePrice"].sum().reset_index()
@@ -143,7 +143,7 @@ with tabs[2]:
 with tabs[3]:
     st.markdown("""
         <h3 style='font-family: Arial, sans-serif; text-align: center; font-size: 26px; font-weight: bold; color: #2ecc71;'> 
-        🏡 Heatmap des Corrélations 🏡
+         Heatmap des Corrélations 
         </h3>
     """, unsafe_allow_html=True)
     df_numeric = df.select_dtypes(include=['int64', 'float64'])
@@ -155,7 +155,7 @@ with tabs[3]:
     plt.close()
 
 with tabs[4]:
-    st.markdown("## 🎯 Estimation du Prix de Vente 🏠")
+    st.markdown("##  Estimation du Prix de Vente ")
     st.write("Ajoutez les caractéristiques pour obtenir une estimation du prix de vente.")
     
     
@@ -173,17 +173,18 @@ with tabs[4]:
     theta_best = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y)
 
     
-    st.markdown("### 📊 Entrez les détails de la maison")
+    st.markdown("###  Entrez les détails de la maison")
     col1, col2 = st.columns(2)
     with col1:
-        surface = st.number_input("🏠 Surface habitable (en pieds carrés)", min_value=int(df['Gr Liv Area'].min()), max_value=int(df['Gr Liv Area'].max()), value=1500, step=50)
-        qualite = st.slider("⭐ Qualité globale de la maison", min_value=1, max_value=10, value=5)
+        surface = st.number_input(" Surface habitable (en pieds carrés)", min_value=int(df['Gr Liv Area'].min()), max_value=int(df['Gr Liv Area'].max()), value=1500, step=50)
+        qualite = st.slider(" Qualité globale de la maison", min_value=1, max_value=10, value=5)
     with col2:
-        annee = st.number_input("📅 Année de construction", min_value=int(df['Year Built'].min()), max_value=int(df['Year Built'].max()), value=2000)
-        garage = st.selectbox("🚗 Nombre de places de garage", options=df['Garage Cars'].unique())
+        annee = st.number_input(" Année de construction", min_value=int(df['Year Built'].min()), max_value=int(df['Year Built'].max()), value=2000)
+        garage = st.selectbox(" Nombre de places de garage", options=df['Garage Cars'].unique())
     
-    if st.button("🔍 Prédire le Prix"):
+    if st.button(" Prédire le Prix"):
         prediction = theta_best[0] + theta_best[1] * surface + theta_best[2] * annee + theta_best[3] * qualite + theta_best[4] * garage
-        st.success(f"💰 Prix estimé : **${prediction:,.2f}**")
+        st.success(f" Prix estimé : **${prediction:,.2f}**")
     
+
     
